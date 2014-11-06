@@ -35,6 +35,9 @@ module Sprockets
         if digest_path = @digests[logical_path]
           abs_digest_path  = "#{@target}/#{digest_path}"
           abs_logical_path = "#{@target}/#{logical_path}"
+          
+          #https://github.com/spohlenz/turbo-sprockets-rails3/commit/d9e2c19ecab9583413ffd42bfa65abd31f6dab08
+          next unless File.exists?(abs_digest_path)
 
           # Remove known digests from css & js
           if abs_digest_path.match(/\.(?:js|css)$/)
